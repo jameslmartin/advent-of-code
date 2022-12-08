@@ -9,17 +9,17 @@ class Grid():
         self.raw_map.append(row)
 
     def build_tree_map(self):
-        for row in range(len(self.raw_map)):
+        for row in range(self.length):
             tree_row = []
-            for col in range(len(self.raw_map[0])):
+            for col in range(self.width):
                 t = Tree(self.raw_map[row][col])
                 tree_row.append(t)
             self.tree_map.append(tree_row)
         self.set_neighbors()
 
     def set_neighbors(self):
-        for row in range(len(self.raw_map)):
-            for col in range(len(self.raw_map[0])):
+        for row in range(self.length):
+            for col in range(self.width):
                 neighbor_up = None if row == 0 else self.tree_map[row-1][col]
                 neighbor_down = None if row == len(self.raw_map)-1 else self.tree_map[row+1][col]
                 neighbor_left = None if col == 0 else self.tree_map[row][col-1]
@@ -160,7 +160,7 @@ class Tree():
 
 if __name__ == "__main__":
     grid = Grid(0, 0)
-    with open("input.txt") as input:
+    with open("test_input.txt") as input:
         lines = input.readlines()
         grid = Grid(len(lines), len(lines[0])-1)
         for line in lines: grid.add_row_to_raw_map(line.strip()) 
