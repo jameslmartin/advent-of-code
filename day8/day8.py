@@ -160,7 +160,7 @@ class Tree():
 
 if __name__ == "__main__":
     grid = Grid(0, 0)
-    with open("test_input.txt") as input:
+    with open("input.txt") as input:
         lines = input.readlines()
         grid = Grid(len(lines), len(lines[0])-1)
         for line in lines: grid.add_row_to_raw_map(line.strip()) 
