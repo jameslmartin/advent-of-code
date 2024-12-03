@@ -1,22 +1,21 @@
 defmodule Day2 do
 
   defp split_line_and_cast(line) do
-    String.split(line, " ", trim: true)
+    String.trim(line, "\n")
+    |> String.split(" ", trim: true)
     |> Enum.map(&(String.to_integer)/1)
   end
 
   def clean_input(filename) do
-    {:ok, input} = File.read(filename)
-    input
-    |> String.split("\n", trim: true)
+    File.stream!(filename)
     |> Enum.map(&(split_line_and_cast)/1)
   end
 
   defp _diffs([]), do: []
-  defp _diffs([ head | [ next | tail]]) when length(tail) == 0 do
+  defp _diffs([ head, next | tail]) when length(tail) == 0 do
     next - head
   end
-  defp _diffs([ head | [ next | tail]]) do
+  defp _diffs([ head, next | tail]) do
     [ next - head, _diffs([next | tail]) ]
     |> List.flatten
   end
